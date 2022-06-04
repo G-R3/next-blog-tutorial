@@ -54,19 +54,17 @@ export default function Home({ posts }) {
             >
                 <h2 className={utilStyles.headingLg}>Blog</h2>
                 <ul className={utilStyles.list}>
-                    {posts.map((post) => {
-                        return (
-                            <li className={utilStyles.listItem} key={post.id}>
-                                <Link href={`/posts/${post.id}`}>
-                                    <a>{post.title}</a>
-                                </Link>
-                                <br />
-                                <small className={utilStyles.lightText}>
-                                    <Date dateString={post.date} />
-                                </small>
-                            </li>
-                        );
-                    })}
+                    {posts.map(({ id, date, title }) => (
+                        <li className={utilStyles.listItem} key={id}>
+                            <Link href={`/posts/${id}`}>
+                                <a>{title}</a>
+                            </Link>
+                            <br />
+                            <small className={utilStyles.lightText}>
+                                <Date dateString={date} />
+                            </small>
+                        </li>
+                    ))}
                 </ul>
             </section>
         </Layout>
