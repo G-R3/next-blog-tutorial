@@ -15,14 +15,14 @@ export function getSortedPostData() {
         const matterResult = matter(fileContents);
         return {
             id,
-            ...matterResult.data,
+            ...(matterResult.data as { date: string; title: string }),
         };
     });
 
-    return allPostData.sort(({ data: a }, { data: b }) => {
-        if (a < b) {
+    return allPostData.sort((a, b) => {
+        if (a.date < b.date) {
             return 1;
-        } else if (a > b) {
+        } else if (a.date > b.date) {
             return -1;
         } else {
             return 0;
@@ -58,6 +58,6 @@ export async function getPostData(id) {
     return {
         id,
         htmlContent,
-        ...matterResult.data,
+        ...(matterResult.data as { date: string; title: string }),
     };
 }
