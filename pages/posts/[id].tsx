@@ -1,10 +1,11 @@
 import Head from "next/head";
+import { GetStaticProps, GetStaticPaths } from "next";
 import Layout from "../../components/Layout";
 import Date from "../../components/Date";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import utilStyles from "../../styles/utils.module.css";
 
-export function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = () => {
     // this must be an array of objects like this:
     /**
      * [
@@ -23,10 +24,10 @@ export function getStaticPaths() {
         paths,
         fallback: false,
     };
-}
+};
 
 // we use id because the file name is [id].js
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
     const postData = await getPostData(params.id);
 
     return {
@@ -34,7 +35,7 @@ export async function getStaticProps({ params }) {
             postData,
         },
     };
-}
+};
 
 export default function Post({ postData }) {
     return (
